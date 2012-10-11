@@ -1,0 +1,89 @@
+Next we list the papers that each member read,
+along with their summary and critique.
+Table \ref{tab:symbols} gives a list of common symbols we used.
+
+\begin{table}[htb]
+\begin{center} 
+\begin{tabular}{|l | c | } \hline \hline 
+Symbol & Definition \\ \hline
+$N$ & number of sound-clips \\
+$D$ & average duration of a sound-clip \\
+$k$  & number of classes \\ \hline
+\end{tabular} 
+\end{center} 
+\caption{Symbols and definitions}
+\label{tab:symbols} 
+ \end{table} 
+
+
+\subsection{Papers read by John Smith}
+The first paper was the wavelet paper by Daubechies
+\cite{Daubechies92Ten}
+\begin{itemize*}
+\item {\em Main idea}: instead of using Fourier transform,
+      wavelet basis functions are localized in frequency {\em and} time.
+      It turns out that they fit real signals better,
+      in the sense they need fewer non-zero coefficients to reconstruct
+      them. Thus they achieve better compression.
+\item {\em Use for our project}:
+      it is extremely related to our sound-clip similarity
+      project, because we can use the top few wavelet coefficients
+      to compare two sound clips.
+\item {\em Shortcomings}:
+      The Daubechies wavelets require a wrap-around setting,
+      which may lead to non-intuitive results.
+\end{itemize*}
+
+The second paper was by $\ldots$
+
+The third paper was by $\ldots$
+
+\subsection{Papers read by Mary Thompson }
+
+$\ldots$
+
+\subsection{Papers read by  Yu Su}
+The first paper was the tutorial paper on Belief Propagation by Yedidia
+\cite{Yedidia:2003:UBP}
+\begin{itemize*}
+\item {\em Main idea}:
+By introducing different inference models and their connections, a wide range of models are converted into the pair wise Markov Random Field graph. Then, the standard and generalized Belief Propagation algorithms are developed on it. The free energy theory from physics can be used to prove the accuracy of BP on loop-free graphs.
+
+\item {\em Use for our project}:
+This paper is a good start for those who do not know Belief Propagation before. It also introduced many models and showed how to convert them, which is helpful when we are constructing models on real data sets.
+
+\item {\em Shortcomings}:
+The regional graph method introduced to solve the accuracy problem suffers exponential computing complexity.
+
+\end{itemize*}
+
+
+The second paper was a deeper discussion on BP by Yedidia
+\cite{Yedidia05constructingfree}
+\begin{itemize*}
+\item {\em Main idea}:
+This paper proved why BP is exact on loop-free graphs and what condition must be kept to get a valid approximation on general graphs. Several variation methods are introduced to get better accuracy and more chance to converge on loopy graphs.
+
+\item {\em Use for our project}:
+This paper would be very useful if we want to do some extra work such as prove the accuracy of our new method.
+
+
+\item {\em Shortcomings}:
+There is still no systematic method to choose regions, which influence much on accuracy and complexity. People still have to tune the algorithm for different problems to get better answers.
+
+\end{itemize*}
+
+
+The third paper was sum-product algorithm by Kschischang
+\cite{Kschischang98factorgraphs}
+\begin{itemize*}
+\item {\em Main idea}:
+This paper showed the prevalence of the application of factor graphs and introduced sum-product algorithm. Some methods translating loopy graphs into loop-free graphs are introduced to improve accuracy.
+
+\item {\em Use for our project}:
+Many background and examples are introduced in this paper. And since sum-product algorithm is similar to BP, this paper helps understand BP.
+
+\item {\em Shortcomings}:
+The graph translation methods might be too complex to compute that the accuracy improvements might be not reachable.
+
+\end{itemize*}

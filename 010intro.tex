@@ -1,0 +1,64 @@
+% {\em
+% \bit
+% \item
+% what is the problem
+% \item
+% what are the applications
+% \eit
+% }
+
+The basic idea of inference problem is try to get something interesting based on 
+the observation and some probability constrains.
+For example, given the constrains on the original code and the noisy channel's property, how can we get the original code from the received corrupted code.
+
+\subsection{Pairwise MRF}
+Pairwise Markov Random Field is a useful tool to model the inference problem where constrains only happens between two facts.
+
+It provides a graph view of the problem.
+The observation are known nodes in the graph and the information we want are unknown nodes.
+The internal constrains between observation and corresponding information are modeled as an edge between known nodes and unknown nodes.
+And the constrains, or compatibility, between two facts are expressed as an edge connecting the two unknown nodes.
+
+Factor Graphs, Potts model and Bayesian Networks are some other models for inference problem.
+As showed by Yedidia\cite{Yedidia:2003:UBP}, all these models can be converted into pairwise MRF model.
+
+\subsection{Belief Propagation}
+Based on the pairwise MRF graph, there is a message passing algorithm to compute the marginal possibility of unknown nodes.
+
+The messages are defined like this: ``I think the chance that you are in state x is p".
+It's expressed as $m_{ij}(x_j)$, which is the chance that node i thinks node j is in state $x_j$.
+
+If we know the state of node i is $x_i$, then we can simply get $m_{ij}(x_j) \equiv \psi(x_i, x_j)$, where $\psi(x_i, x_j)$
+is the constrain between information i and information j.
+
+Apply the information of what other unknown nodes think node i is into the $m_{ij}(x_j)$ we just get via complete probability formula, the result would be
+$$m_{ij}(x_j) \equiv \sum_{x_i} {\psi(x_i, x_j) \prod_{k \in N(x_i) \backslash j}{m_{ki}(x_i)}}$$
+
+Gather the internal constrains between the observation and information i, we can get
+$$m_{ij}(x_j) \equiv \sum_{x_i} {\phi(x_i) \psi(x_i, x_j) \prod_{k \in N(i) \backslash j}{m_{ki}(x_i)}}$$
+
+This is exactly how Belief Propagation defines the message and the update of messages\cite{UBP}. And the final probability of information i is $x_i$ would be(k is used for normalization):
+$$b_i(x_i) \equiv k\phi(x_i)\prod_{j \in N(i)} m_{ji}(x_i)$$
+
+\subsection{Fast Algorithm for Belief Background}
+The original Belief Propagation (\textbf{BP}) is essentially a message passing algorithm on the graph model depicting the dependency relationships among all nodes (variables or events) we care about. The great idea inside this algorithm is to achieve a complicate computation result by aggregating many local simple calculations. It breaks the marginal probability computation, the number of whose product terms increases exponentially with respect to the number of random variables, into linear number of local computations on every node. which has been discussed in previous sections.
+
+One one hand, The message passing scheme makes the computation flow quite clear and understandable. One the other hand, the general mathematical expression for \textbf{BP} is not transparent now, for the whole computation is divided into many small local message calculations for every node. It is not very convenient and easy to convert the message flow into one or several highly summarized mathematical formulas. Since \textbf{BP} has the typical message generating and passing scheme, a variety of message schedules can be used to solve it in a finite number of steps. This also means that the message schedule solution dominates the efficiency of \textbf{BP}.
+
+\subsection{Problem}
+
+The problems we want to solve is the following:
+\bit
+\item GIVEN: the BP algorithm
+\item FIND: a way to run it on hadoop
+\item TEST: on some data sets with more than 2 states per nodes
+\eit
+
+\bit
+\item GIVEN: the Fast-BP algorithm
+\item FIND: a way to expand it to multi-classes
+\eit
+
+This is an important problem, because $\ldots$
+millions of dollars $\ldots$
+millions of human lives $\ldots$
